@@ -29,5 +29,8 @@ test.describe("The user creates an order for an Apple monitor 24", () => {
 
         // Locate the Add to cart, and click
         await page.locator('a:has-text("Add to cart")').click();
+
+         // Pause execution to inspect the browser before it closes
+         await page.pause();
     });
 });

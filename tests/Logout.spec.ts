@@ -22,5 +22,8 @@ test.describe("The user can Logout", () => {
 
         // Locate logout button, and click
         await page.locator("#logout2").click();
+
+         // Pause execution to inspect the browser before it closes
+         await page.pause();
     });
 });
