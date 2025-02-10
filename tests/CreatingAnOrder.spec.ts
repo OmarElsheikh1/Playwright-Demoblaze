@@ -8,7 +8,7 @@ test.describe("The user creates an order for an Apple monitor 24", () => {
         // Open the website
         await page.goto("https://www.demoblaze.com/");
 
-        
+
         // Locate login button, and click
         await page.locator("#login2").click();
 
@@ -21,6 +21,9 @@ test.describe("The user creates an order for an Apple monitor 24", () => {
         // Locate loging button, and click
         await page.locator('button:has-text("Log in")').click();
 
+        // This wait is necessary to avoid getting another element from the page
+        await page.waitForSelector('//div[@class = "list-group"]/a[4]');
+
         // Locate the monitors section, and click
         await page.locator('//div[@class = "list-group"]/a[4]').click();
 
@@ -30,7 +33,7 @@ test.describe("The user creates an order for an Apple monitor 24", () => {
         // Locate the Add to cart, and click
         await page.locator('a:has-text("Add to cart")').click();
 
-         // Pause execution to inspect the browser before it closes
-         await page.pause();
+        // Pause execution to inspect the browser before it closes
+        await page.pause();
     });
 });
