@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class PurchasePage {
     private page: Page;
@@ -9,6 +9,8 @@ export class PurchasePage {
     private monthField = '#month';
     private yearField = '#year';
     private purchaseButton = 'button:has-text("Purchase")';
+    private confirmationMessage = '.sweet-alert';
+    private pressOkButton = '//button[@tabindex = "1"]';
 
     constructor(page: Page) {
         this.page = page;
@@ -22,5 +24,12 @@ export class PurchasePage {
         await this.page.locator(this.monthField).fill('3');
         await this.page.locator(this.yearField).fill('2025');
         await this.page.locator(this.purchaseButton).click();
+    }
+
+    async assertPurchaseSuccess(): Promise<void> {
+        await this.page.waitForSelector(this.confirmationMessage, { state: "visible" });
+        const confirmationText = await this.page.locator(this.confirmationMessage).innerText();
+        expect(confirmationText).toContain("Thank you for your purchase!");
+        await this.page.locator(this.pressOkButton).click();
     }
 }

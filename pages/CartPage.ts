@@ -12,8 +12,10 @@ export class CartPage {
 
     async assertMonitorWasAdded(): Promise<void> {
         await this.page.locator(this.cartSectionLink).click();
-        const product = this.page.locator(this.productName);
-        await expect(product).toContainText('Apple monitor 24');
+        await this.page.waitForSelector(this.productName, { state: "visible" });
+
+        const productText = await this.page.locator(this.productName).innerText();
+        expect(productText).toContain('Apple monitor 24');
     }
 
     async placeAnOrder(): Promise<void> {

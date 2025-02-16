@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class LoginPage {
     private page: Page;
@@ -12,15 +12,13 @@ export class LoginPage {
         this.page = page;
     }
 
-    async goToLoginPage(): Promise<void> {
-        await this.page.goto("https://www.demoblaze.com/");
-    }
-
     async login(username: string, password: string): Promise<void> {
         await this.page.locator(this.loginLink).click();
+        await this.page.waitForSelector(this.usernameInput, { state: "visible" });
         await this.page.locator(this.usernameInput).fill(username);
         await this.page.locator(this.passwordInput).fill(password);
         await this.page.locator(this.loginButton).click();
         await this.page.waitForSelector(this.welcomeMessage);
+        expect(await this.page.locator(this.welcomeMessage).innerText()).toContain(username);
     }
 }
