@@ -13,6 +13,8 @@ It follows the **Page Object Model (POM) design pattern** for better test mainta
 - **Playwright** for UI Automation  
 - **Node.js + TypeScript**  
 - **Page Object Model (POM)**
+> **Future enhancements:** I'm working on improving page structures, dialog handling, and the BasePage for better efficiency and maintainability.
+
 
 ---
 ## ✨ What's New: POM Design Pattern Added
